@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Igris — AI-Powered Test Automation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<section id="content" class="main">
+
+							<div style="text-align:center; margin-bottom: 2em;">
+								<h1>Igris</h1>
+								<p style="font-size: 1.2em;">AI-Powered Test Automation Framework</p>
+								
+							</div>
+
+							<span class="image main"><img src="images/AI_Igris/01_streamlit_ui.png" alt="Streamlit UI" style="border-radius:0;" /></span>
+
+							<hr />
+
+							<h2 style="text-align:center;">What Is Igris?</h2>
+							<p>Igris is a test automation framework that removes the scripting bottleneck from UI testing. Instead of writing test code manually, a QA engineer — or anyone on the team — types a plain text instruction describing the scenario. Igris sends that instruction to an AI agent, receives a structured test plan back, and runs it through Playwright automatically.</p>
+							<p>The end result: a full test execution with per-step screenshots embedded in an Allure report, produced from a single sentence. No selectors, no code, no test structure required from the user.</p>
+							<p>Built as a senior QA portfolio project targeting SauceDemo, a standard e-commerce test application. The framework covers login, cart, and full checkout flows — enough to demonstrate a real, end-to-end automation pipeline powered by AI.</p>
+
+							<hr />
+
+							<h2 style="text-align:center;">How It Works</h2>
+							<p>The flow from instruction to report is straightforward:</p>
+
+							<pre style="text-align:left;"><code>  You type:  "Login, add two products to the cart, complete checkout, verify confirmation"
+          ↓
+  Igris Agent  →  calls OpenAI, receives a JSON test plan
+          ↓
+  script_creation.py  →  converts the plan into a pytest file
+          ↓
+  pytest runs it  →  AI_plan_translator.py drives the browser step by step
+          ↓
+  Timestamped results folder  →  screenshots + Allure report</code></pre>
+
+							<p>Each step in the plan is executed by the translator, which resolves human-readable selector names (like <code>cart.checkout_button</code>) to actual CSS selectors defined in per-page JSON files. If a selector changes in the HTML, you update it in one file — every test using it is automatically fixed.</p>
+
+							<hr />
+
+							<h2 style="text-align:center;">The Design Decision That Makes It Portable</h2>
+							<p>The most deliberate choice in Igris is what the AI <em>doesn't</em> produce. Instead of generating Python code or Playwright scripts directly, the AI outputs a <strong>language-agnostic JSON plan</strong>. A separate translator layer reads that plan and executes it.</p>
+							<p>This is the <strong>Interpreter Pattern</strong> — and it has a specific purpose: the framework was designed knowing it could be adopted by different teams, in different languages, on different projects.</p>
+
+							<div class="table-wrapper">
+								<table>
+									<thead>
+										<tr>
+											<th>Target</th>
+											<th>What changes</th>
+											<th>What stays the same</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>TypeScript + Playwright</td>
+											<td>Translator rewritten in TS</td>
+											<td>AI agent, JSON plan, selectors</td>
+										</tr>
+										<tr>
+											<td>Java + Selenium</td>
+											<td>Translator + selector resolution</td>
+											<td>AI agent, JSON plan structure</td>
+										</tr>
+										<tr>
+											<td>Cypress</td>
+											<td>Translator maps to cy.* calls</td>
+											<td>AI agent, JSON plan</td>
+										</tr>
+										<tr>
+											<td>Mobile (Appium)</td>
+											<td>Translator + mobile selectors</td>
+											<td>AI agent, JSON plan structure</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<p>The AI layer stays unchanged. The JSON plan stays unchanged. Only the translator is swapped. A team already on Java doesn't need to adopt Python — they write their own translator and plug it in.</p>
+
+							<hr />
+
+							<h2 style="text-align:center;">What Makes It Reliable</h2>
+							<p>A few specific decisions were made to keep the AI output consistent and the test execution trustworthy:</p>
+							<ul>
+								<li><strong>Screen-aware AI</strong> — the agent's prompt includes a map of the application's screens in order. The AI knows which selectors belong to which screen and never mixes them up across steps.</li>
+								<li><strong>Constrained actions</strong> — the AI can only produce actions the translator knows how to run. No hallucinated methods, no unsupported steps.</li>
+								<li><strong>Assert reasoning</strong> — a chain-of-thought rule in the prompt forces the AI to analyze the element type before choosing an assertion. This reduces false positives and makes assertions more meaningful.</li>
+								<li><strong>Deterministic output</strong> — the agent runs at temperature 0. The same instruction produces the same plan every time.</li>
+								<li><strong>Dual screenshot storage</strong> — every step screenshot is saved to disk in a timestamped folder <em>and</em> embedded in the Allure report. Evidence survives even if the report is regenerated.</li>
+							</ul>
+
+							<hr />
+
+							<h2 style="text-align:center;">CI/CD — No API Key Needed</h2>
+							<p>The smoke test pipeline on GitHub Actions runs the full checkout flow on every push to <code>main</code> — without calling OpenAI. The CI test is a manually written pytest file, keeping the pipeline fast, deterministic, and free to run.</p>
+							<p>A separate <code>config.ci.yaml</code> switches the framework to headless Chromium and disables per-step screenshots automatically. No code changes needed between local and CI runs — the environment variable does the switch.</p>
+							<p>After every run, the Allure HTML report is uploaded as a downloadable artifact directly from the Actions dashboard.</p>
+
+							<hr />
+
+							<h2 style="text-align:center;">See It In Action</h2>
+							<p style="text-align:center;">Instruction used for this demo:</p>
+							<blockquote style="text-align:center;"><em>"Login with valid credentials, add the Sauce Labs Backpack and Sauce Labs Bike Light to the cart, complete the checkout flow, and verify the order confirmation."</em></blockquote>
+
+							<div style="margin-bottom: 3em;">
+								<h3>Step 1 — Plain text input via Streamlit</h3>
+								<p>The user types the scenario. No code, no selectors, no test structure required.</p>
+								<img src="images/AI_Igris/01_streamlit_ui.png" alt="Streamlit UI" style="width:100%; border-radius:0; border:none; display:block;" />
+							</div>
+
+							<div style="margin-bottom: 3em;">
+								<h3>Step 2 — AI generates the JSON test plan</h3>
+								<p>The agent interprets the instruction and returns a structured plan. Every action maps to something the translator knows how to execute.</p>
+								<img src="images/AI_Igris/02_generated_plan.png" alt="Generated JSON Plan" style="width:100%; border-radius:0; border:none; display:block;" />
+							</div>
+
+							<div style="margin-bottom: 3em;">
+								<h3>Step 3 — Parallel execution across browsers</h3>
+								<p>The plan runs via pytest across Chromium and Firefox simultaneously using pytest-xdist. Both runs appear as separate test entries in the report.</p>
+								<img src="images/AI_Igris/03_console_parallel_execution.png" alt="Console Parallel Execution" style="width:100%; border-radius:0; border:none; display:block;" />
+							</div>
+
+							<div style="margin-bottom: 3em;">
+								<h3>Step 4 — Allure report: suite overview</h3>
+								<p>All runs visible in the Allure dashboard, organized by suite and browser.</p>
+								<img src="images/AI_Igris/04A_Allure_report_1.png" alt="Allure Suite Overview" style="width:100%; border-radius:0; border:none; display:block;" />
+							</div>
+
+							<div style="margin-bottom: 3em;">
+								<h3>Step 4 — Allure report: products verified</h3>
+								<p>Per-step screenshots embedded in the report. Both products from the instruction confirmed as added to the cart.</p>
+								<img src="images/AI_Igris/04_Allure_image_report_.png" alt="Allure Two Products Added" style="width:100%; border-radius:0; border:none; display:block;" />
+							</div>
+
+							<div style="margin-bottom: 3em;">
+								<h3>Step 4 — Allure report: order confirmed</h3>
+								<p>The final assertion verifies the confirmation screen. Test closes with a validated successful transaction.</p>
+								<img src="images/AI_Igris/04B_Allure_Final.png" alt="Allure Final" style="width:100%; border-radius:0; border:none; display:block;" />
+							</div>
+
+							<div style="margin-bottom: 3em;">
+								<h3>Step 5 — CI green on GitHub Actions</h3>
+								<p>Every push to <code>main</code> triggers the smoke test. Allure report generated and uploaded as a downloadable artifact automatically.</p>
+								<img src="images/AI_Igris/05_ci_passing.png" alt="CI Passing" style="width:100%; border-radius:0; border:none; display:block;" />
+							</div>
+
+							<hr />
+
+							<div style="text-align:center;">
+								<ul class="actions special">
+									<li><a href="#" class="button primary">View on GitHub</a></li>
+									<li><a href="index.html" class="button">Back to Portfolio</a></li>
+								</ul>
+							</div>
+
+						</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>Interested in AI-driven testing?</h2>
+							<p>Let's talk about what this kind of framework can do for your team.</p>
+							<ul class="actions">
+								<li><a href="index.html" class="button">Back to Portfolio</a></li>
+							</ul>
+						</section>
+						<section>
+							<h2>Contact</h2>
+							<dl class="alt">
+								<dt>Email</dt>
+								<dd><a href="#">your@email.com</a></dd>
+							</dl>
+							<ul class="icons">
+								<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</section>
+						<p class="copyright">&copy; Portfolio. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<!-- <header id="header" class="alt">
+						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+					</header> -->
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#intro" class="active">About me</a></li>
+							<li><a href="#first">Igris</a></li>
+							<li><a href="#igris-demo">AI Framework</a></li>
+							<li><a href="#second">API Framework</a></li>
+							<li><a href="#cta">Contact</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Welcome to my portfolio!</h2>
+										</header>
+										<p>I've worn every hat in QA — individual contributor, automation specialist, team lead — and loved each one.
+										But what truly energizes me is hands-on problem-solving with cutting-edge tools, and right now that means AI.</p>
+										<p>Last year I rebuilt my core skills from the ground up: deeper into frameworks, deeper into automation architecture —
+										and then I brought AI into the mix. The results clicked immediately. I'm now genuinely excited about what AI-driven
+										testing can do, and these projects are the proof. Check out my personal projects below.</p>
+										<!-- <p> iykyk :( I'm looking for an opportunity to leverage the latest technologies and build AI-driven QA solutions —
+										joining a team that values innovation and wants to transform how quality assurance works. Let's make great things</p> -->
+										<ul class="actions">
+											<li><a href="https://www.linkedin.com/in/argenis-bennett-976028137/" class="button">Check my linkedIn</a></li>
+										</ul>
+									</div>
+									<span class="image"><img src="images/pic01.jpg" alt="" /></span>
+								</div>
+							</section>
+
+						<!-- Skills Section -->
+							<section id="first" class="main special">
+								<header class="major">
+									<h2>What I Bring</h2>
+									<p>Senior QA expertise across the full automation stack — from AI-driven test generation to CI/CD pipeline design.</p>
+								</header>
+								<ul class="features">
+									<li>
+										<span class="icon solid major style1 fa-robot"></span>
+										<h3>AI-Augmented Testing</h3>
+										<p>I don’t just use AI tools — I build them into the test pipeline. From generating JSON test plans via OpenAI to designing interpreter-pattern frameworks that keep AI output portable across any tech stack.</p>
+									</li>
+									<li>
+										<span class="icon solid major style3 fa-network-wired"></span>
+										<h3>API Test Architecture</h3>
+										<p>End-to-end coverage across REST APIs: auth validation, full CRUD lifecycle, negative contracts, and data-driven iteration. Built to handle real-world infrastructure challenges, not just happy paths.</p>
+									</li>
+									<li>
+										<span class="icon solid major style5 fa-code-branch"></span>
+										<h3>CI/CD Pipeline Design</h3>
+										<p>GitHub Actions pipelines with environment-aware gating, artifact management, and parallel execution. Configurations that are version-controlled, reviewable, and built to stay green even when external services misbehave.</p>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Igris Demo Walkthrough -->
+							<section id="second" class="main">
+								<header class="major">
+									<h2>AI Framework — Igris</h2>
+									<p>Igris generates, executes, and reports UI tests from plain text instructions. Describe a scenario in English — the AI produces a structured JSON test plan, Playwright runs it, and Allure captures every step with screenshots. No scripting required.</p>
+									<p>The interpreter pattern keeps the AI output portable: the same JSON plan that runs today in Python/Playwright can be picked up by a TypeScript, Java, or Selenium translator without touching the AI layer.</p>
+								</header>
+
+								<blockquote><em>&quot;Create a test where the user logs in with valid credentials, then adds two products, navigates to the cart, completes the checkout flow, and validates the order was completed successfully.&quot;</em></blockquote>
+
+								<img src="images/AI_Igris/01_streamlit_ui.png" alt="Streamlit UI" style="width:100%; border-radius:0; border:none; display:block; margin-bottom: 2em;" />
+
+								<footer class="major">
+									<ul class="actions special">
+										<li><a href="AI_Framework.html" class="button primary">See Full Breakdown</a></li>
+										<li><a href="#" class="button">View on GitHub</a></li>
+									</ul>
+								</footer>
+							</section>
+
+						<!-- API Framework Section -->
+							<section id="second" class="main">
+								<header class="major">
+									<h2>API Framework — GoRest</h2>
+									<p>An API test automation framework built against the GoRest public REST API using Postman collections and Newman. Tests run from the command line or automatically through GitHub Actions on every push. The pipeline handles a real-world infrastructure challenge: GoRest sits behind Cloudflare, which blocks cloud server IPs — a dedicated gate collection detects this gracefully and controls whether the remaining jobs run.</p>
+								</header>
+
+								<div style="margin-bottom: 3em;">
+									<h3>Collection 01 — CI Environment Check</h3>
+									<p>Acts as a pipeline gate. The test expects a 403 Cloudflare block — if blocked, the pipeline skips the API tests gracefully. If the API is actually accessible, the gate opens and the remaining collections run.</p>
+									<img src="images/API_Framework/01_CloudFlare_validation.png" alt="Collection 01 Results" style="width:100%; border-radius:0; border:none; display:block;" />
+								</div>
+
+								<div style="margin-bottom: 3em;">
+									<h3>Collection 02 — Authentication Validation</h3>
+									<p>Validates both sides of auth: an invalid token returns 401, a valid token returns 200. Each request asserts status code, response time under 2000ms, valid JSON, and correct Content-Type.</p>
+									<img src="images/API_Framework/02_auth_val.png" alt="Collection 02 Results" style="width:100%; border-radius:0; border:none; display:block;" />
+								</div>
+
+								<div style="margin-bottom: 3em;">
+									<h3>Collection 03 — End-to-End Flow</h3>
+									<p>Full CRUD lifecycle: create user → post → comment → delete all, run across 4 data iterations from a CSV file. Resource IDs are chained across requests. Response time assertions run at collection level to avoid duplication.</p>
+									<img src="images/API_Framework/03_E2E_Flow.png" alt="Collection 03 Results" style="width:100%; border-radius:0; border:none; display:block;" />
+								</div>
+
+								<div style="margin-bottom: 3em;">
+									<h3>Collection 04 — Negative Validation</h3>
+									<p>Tests API contract boundaries: missing fields, invalid gender, invalid email, duplicate email, and empty body — all expecting 422 with the correct error target. Duplicate email uses dynamic pre-request data generation to avoid test pollution.</p>
+									<img src="images/API_Framework/04_Negative_validations.png" alt="Collection 04 Results" style="width:100%; border-radius:0; border:none; display:block;" />
+								</div>
+
+								<div style="margin-bottom: 3em;">
+									<h3>GitHub Actions — Full Pipeline Flow</h3>
+									<p>The pipeline runs on every push and PR to main. Four jobs run in parallel after the gate check passes, each uploading its Newman report as a downloadable artifact.</p>
+									<img src="images/API_Framework/GitHub-Actions_Flows.png" alt="GitHub Actions Flow" style="width:100%; border-radius:0; border:none; display:block;" />
+								</div>
+
+								<footer class="major">
+									<ul class="actions special">
+										<li><a href="https://github.com/bencu91/API_Demo_GoRest" class="button">View on GitHub</a></li>
+									</ul>
+								</footer>
+							</section>
+
+						<!-- Get Started -->
+							<section id="cta" class="main special">
+								<header class="major">
+									<h2>Congue imperdiet</h2>
+									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
+									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
+								</header>
+								<footer class="major">
+									<ul class="actions special">
+										<li><a href="generic.html" class="button primary">Get Started</a></li>
+										<li><a href="generic.html" class="button">Learn More</a></li>
+									</ul>
+								</footer>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>Aliquam sed mauris</h2>
+							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+							<ul class="actions">
+								<li><a href="generic.html" class="button">Learn More</a></li>
+							</ul>
+						</section>
+						<section>
+							<h2>Etiam feugiat</h2>
+							<dl class="alt">
+								<dt>Address</dt>
+								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+								<dt>Phone</dt>
+								<dd>(000) 000-0000 x 0000</dd>
+								<dt>Email</dt>
+								<dd><a href="#">information@untitled.tld</a></dd>
+							</dl>
+							<ul class="icons">
+								<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>
+							</ul>
+						</section>
+						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
