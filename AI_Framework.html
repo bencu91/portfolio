@@ -30,7 +30,7 @@
 				<section id="content" class="main">
 					
 					<h2>What Is Igris?</h2>
-					<p>The idea for this framework came from a conversation with a friend: “What if we could generate automated scripts from simple words?” From that spark, I built Igris, an AI‑powered testing framework that connects with OpenAI to generate a JSON plan that functions as test cases. Over time, and after getting feedback, I’ve added new features and integrated CI/CD through GitHub Actions and workflow automation.</p>
+					<p>The idea for this framework came from a conversation with a friend: “What if we could generate automated scripts from simple words?” From that spark, I built Igris, an AI‑powered testing framework that connects with OpenAI to generate a JSON plan that functions as test cases. A small team has already started using it and shared feedback, which helped me refine the AI, add new features, and integrate CI/CD through GitHub Actions and workflow automation.</p>
 					<p><strong>Stack:</strong> Python · pytest · Playwright · OpenAI API · Streamlit · Allure · GitHub Actions</p>
 
 					<hr />
@@ -40,15 +40,15 @@
 					<blockquote><em>"Create a test where the user logs in with valid credentials, then adds two products, navigates to the cart, completes the checkout flow, and validates the order was completed successfully."</em></blockquote>
 
 					<h3>Step 1 — Plain text input via Streamlit</h3>
-					<p>Run app.py in cmd, The type title and the scenario. No code, no selectors, no test structure required.</p>
+					<p>Run app.py in cmd, then type the title and scenario to generate the test plan. No code, no selectors, no test structure required.</p>
 					<span class="image main"><img src="https://bencu91.github.io/portfolio/images/AI_Igris/01_streamlit_ui.png" alt="" /></span>
 
 					<h3>Step 2 — AI generates the JSON test plan</h3>
 					<p>The agent interprets the instruction and returns a structured plan. Every action maps to something the translator knows how to execute.</p>
 					<span class="image main"><img src="https://bencu91.github.io/portfolio/images/AI_Igris/02_generated_plan.png" alt="" /></span>
 
-					<h3>Step 3 — Parallel execution across browsers</h3>
-					<p>The plan runs via pytest across Chromium and Firefox simultaneously using pytest-xdist. Both runs appear as separate test entries in the report.</p>
+					<h3>Step 3 — Test plan execution</h3>
+					<p>Once the plan is ready, Igris runs it against the browser — or both Chromium and Firefox in parallel, depending on the configuration.</p>
 					<span class="image main"><img src="https://bencu91.github.io/portfolio/images/AI_Igris/03_console_parallel_execution.png" alt="" /></span>
 
 					<h3>Step 4 — Allure report: suite overview</h3>
