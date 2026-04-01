@@ -45,7 +45,7 @@
 										<p>My name is Argenis, I started in QA as a manual tester, moved into automation, and later had the chance to lead QA teams. Experiencing different sides of QA gave me a well-rounded perspective on software quality that I bring into every project.</p>
 										<p>Recently, the rise of AI sparked my curiosity, and what began as exploration quickly revealed powerful ways to enhance testing and workflows. I want to grow alongside the evolution of AI, applying my expertise to add real value while continuously learning. I see working in an environment that promotes innovation and embraces emerging technologies as both an exciting challenge and something that would truly make me happy.</p>
 										<!-- <p>Recently, the rise of AI sparked my curiosity, and what began as exploration quickly revealed powerful ways to enhance testing and workflows.I want to grow alongside the evolution of AI, applying my expertise while continuously learning. Working in an environment that promotes innovation and embraces emerging technologies is what truly makes me happy.</p> -->
-										<p>The two frameworks below are proof of how I approach problems. Right now I’m exploring agent orchestration and retrieval-augmented generation (RAG) — excited to shape my next project around these areas. Check them out.</p>
+										<p>I put together two frameworks to highlight my approach to QA. At the moment, I’m diving into agent orchestration and retrieval‑augmented generation (RAG), with plans to shape my next project around them. Feel free to explore.</p>
 										<!--<ul class="actions">
 											<li><a href="https://www.linkedin.com/in/argenis-bennett-976028137/" class="button">Check my LinkedIn</a></li>
 										</ul> -->
@@ -97,10 +97,11 @@
 							<section id="ai-framework" class="main">
 								<header class="major">
 									<h2>AI Framework — Igris</h2>
-									<p>The idea for this framework came from a conversation with a friend: “What if we could generate automated scripts from simple words?” From that spark, I built Igris, an AI‑powered testing framework that connects with OpenAI to generate a JSON plan that functions as test cases. Over time, and after getting feedback, I’ve added new features and integrated CI/CD through GitHub Actions and workflow automation.</p>
-									<p>While designing it, I followed an interpreter pattern so the tool can adapt to different teams and projects depending on their needs. Right now, it uses Pytest/Playwright, but by updating or creating a JSON plan translator, it can be extended to other stacks such as Java/Selenium or Cypress in JavaScript/TypeScript.</p>
 								</header>
-
+									<p>The idea for this framework came from a conversation with a friend: “What if we could generate automated scripts from simple words?” From that spark, I built Igris, an AI‑powered testing framework that connects with OpenAI to generate a JSON plan that functions as test cases, using SauceDemo as the demo site. Over time, and after getting feedback, I’ve added new features and integrated CI/CD through GitHub Actions and workflow automation.</p>
+									<p>While designing it, I followed an interpreter pattern so the tool can adapt to different teams and projects depending on their needs. Right now, it uses Pytest/Playwright, but by updating or creating a JSON plan translator, it can be extended to other stacks such as Java/Selenium or Cypress in JavaScript/TypeScript.</p>
+								
+								<p>To see how the framework works, click the button below to view a demo using the following instruction:</p>
 								<blockquote><em>&quot;Create a test where the user logs in with valid credentials, then adds two products, navigates to the cart, completes the checkout flow, and validates the order was completed successfully.&quot;</em></blockquote>
 
 								<img src="images/AI_Igris/01_streamlit_ui.png" alt="Streamlit UI" style="width:100%; border-radius:0; border:none; display:block; margin-bottom: 2em;" />
@@ -108,7 +109,7 @@
 								<footer class="major">
 									<ul class="actions special">
 										<li><a href="AI_Framework.html" class="button primary">See Full Breakdown</a></li>
-										<li><a href="#" class="button">View on GitHub</a></li>
+										<!-- <li><a href="#" class="button">View on GitHub</a></li> -->
 									</ul>
 								</footer>
 							</section>
@@ -117,9 +118,10 @@
 							<section id="api-framework" class="main">
 								<header class="major">
 									<h2>API Framework — GoRest</h2>
-									<p>An API test automation framework built against the GoRest public REST API using Postman collections, Newman, and GitHub Actions. Authentication validation, a full data-driven CRUD lifecycle, and negative contract testing — all wired into a CI/CD pipeline.</p>
-									<p>Everything worked perfectly locally. Then CI exposed a real infrastructure problem. How I handled it became the most interesting design decision in the whole project.</p>
 								</header>
+									<p>An API test automation framework built against the GoRest public REST API using Postman collections, Newman, and GitHub Actions. Authentication validation, a full data-driven CRUD lifecycle, and negative contract testing — all wired into a CI/CD pipeline.</p>
+									<p>While working on the CI/CD part, I ran into an unexpected issue — Cloudflare was blocking the requests, which led me to rethink my approach and how to show the pipeline was working.</p>
+								
 
 								<img src="images/API_Framework/GitHub-Actions_Flows.png" alt="GitHub Actions Pipeline" style="width:100%; border-radius:0; border:none; display:block; margin-bottom: 2em;" />
 
