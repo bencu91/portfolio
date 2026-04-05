@@ -71,19 +71,37 @@
 
 					<h2>How It Works</h2>
 					
-					</p>Igris uses selectors to "understand" the page with the help of certain prompts and instructions. Right now, the configured flows are validation and the workflow (because it's a demo). Once the information is sent, it returns a JSON plan. Then a class uses that data to write the test case and execute it on Playwright. The browser configuration is managed by a class named config.yaml, which handles most of the framework's configuration and enables features like the AI model selection, browsers, screenshots per step, and Allure reports that capture visual evidence at every step.</p>
+					<p>Igris uses selectors and prompts to understand the page structure and generate a JSON plan from a plain text instruction. That plan is then converted into a pytest file and executed via Playwright. Everything from browser selection and AI model to screenshots and Allure reports is controlled through a config file — no code changes needed between runs. It's split in two independent layers: the AI generation side calls OpenAI and produces the test file, while the execution side — pytest, Playwright, and CI/CD — runs completely on its own, no API key needed.</p>
 					<p>For CI/CD, I set up a smoke test that runs whenever code is pushed or a pull request is made. There's a script that runs through the entire checkout flow automatically — so every time someone commits, the test validates the whole flow end-to-end.</p>
+					<p style="font-size:0.9em; opacity:0.8;"><em>Note: depending on the model, instructions may need to be more or less detailed — a more capable model handles vague inputs better, a lighter one benefits from more specific wording.</em></p>
 					<p>The flow from instruction to report is straightforward:</p>
 
-					<pre><code>  You type:  "Instruction in plain English"
-          ↓
-  Igris Agent  →  calls OpenAI, receives a JSON test plan
-          ↓
-  script_creation.py  →  converts the plan into a pytest file
-          ↓
-  pytest runs it  →  AI_plan_translator.py drives the browser step by step
-          ↓
-  Timestamped results folder  →  screenshots + Allure report</code></pre>
+					<div style="display:flex; flex-direction:column; align-items:center; gap:0; margin: 2em 0; font-family: monospace;">
+						<div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:0.6em 2em; color:#524b4ba6; text-align:center;">
+							<strong>Plain text instruction</strong><br>
+							<span style="font-size:0.8em; opacity:0.8;">You type what the test should do</span>
+						</div>
+						<div style="color:rgba(0,0,0,0.5); font-size:1.4em; line-height:1.2;">↓</div>
+						<div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:0.6em 2em; color:#524b4ba6; text-align:center;">
+							<strong>Igris Agent</strong><br>
+							<span style="font-size:0.8em; opacity:0.8;">Calls OpenAI · Returns a JSON test plan</span>
+						</div>
+						<div style="color:rgba(0,0,0,0.5); font-size:1.4em; line-height:1.2;">↓</div>
+						<div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:0.6em 2em; color:#524b4ba6; text-align:center;">
+							<strong>script_creation.py</strong><br>
+							<span style="font-size:0.8em; opacity:0.8;">Converts the plan into a pytest file</span>
+						</div>
+						<div style="color:rgba(0,0,0,0.5); font-size:1.4em; line-height:1.2;">↓</div>
+						<div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:0.6em 2em; color:#524b4ba6; text-align:center;">
+							<strong>AI_plan_translator.py</strong><br>
+							<span style="font-size:0.8em; opacity:0.8;">pytest runs it · Playwright drives the browser step by step</span>
+						</div>
+						<div style="color:rgba(0,0,0,0.5); font-size:1.4em; line-height:1.2;">↓</div>
+						<div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:0.6em 2em; color:#524b4ba6; text-align:center;">
+							<strong>Results</strong><br>
+							<span style="font-size:0.8em; opacity:0.8;">Timestamped folder · Screenshots · Allure report</span>
+						</div>
+					</div>
 					
 					<hr />
 
@@ -170,20 +188,10 @@
 						<li><strong>Deterministic output</strong> — the agent runs at temperature 0. The same instruction produces the same plan every time.</li>
 						<li><strong>Dual screenshot storage</strong> — every step screenshot is saved to disk in a timestamped folder <em>and</em> embedded in the Allure report. Evidence survives even if the report is regenerated.</li>
 					</ul>
-					<!--
 					<hr />
 
-					<h2>CI/CD — No API Key Needed</h2>
-					<p>The smoke test pipeline on GitHub Actions runs the full checkout flow on every push to <code>main</code> — without calling OpenAI. The CI test is a manually written pytest file, keeping the pipeline fast, deterministic, and free to run.</p>
+					<p>The current setup works great for demos and small to mid-size projects. For bigger applications with several flows, multi-agent orchestration and RAG would be the natural next step.</p>
 
-					<p>A separate <code>config.ci.yaml</code> switches the framework to headless Chromium and disables per-step screenshots automatically. No code changes needed between local and CI runs — the environment variable does the switch.</p>
-
-					<p>After every run, the Allure HTML report is uploaded as a downloadable artifact directly from the Actions dashboard.</p>
-
-					<p>Built as a senior QA portfolio project targeting SauceDemo, a standard e-commerce test application. The framework covers login, cart, and full checkout flows — enough to demonstrate a real, end-to-end automation pipeline powered by AI.</p>
-
-					<hr />
--->
 					<ul class="actions">
 						<!-- <li><a href="https://github.com/bencu91/AI_framework" class="button">View on GitHub</a></li> -->
 						<li><a href="index.html" class="button">Back to Portfolio</a></li>
