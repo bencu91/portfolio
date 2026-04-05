@@ -9,8 +9,8 @@
 		<title>Igris - AI-Powered Test Automation Framework</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="https://bencu91.github.io/portfolio/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="https://bencu91.github.io/portfolio/assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
 
@@ -40,7 +40,7 @@
 					<blockquote><em>"Create a test where the user logs in with valid credentials, then adds two products, navigates to the cart, completes the checkout flow, and validates the order was completed successfully."</em></blockquote>
 
 					<h3>Step 1 — Plain text input via Streamlit</h3>
-					<p>Run app.py in cmd, then type the title and scenario to generate the test plan. No code, no selectors, no test structure required.</p>
+					<p>Run "streamlit run app.py" in cmd, then type the title and scenario to generate the test plan. No code, no selectors, no test structure required.</p>
 					<span class="image main"><img src="https://bencu91.github.io/portfolio/images/AI_Igris/01_streamlit_ui.png" alt="" /></span>
 
 					<h3>Step 2 — AI generates the JSON test plan</h3>
@@ -91,6 +91,36 @@
 					<p>The most deliberate choice in Igris is what the AI <strong>doesn't</strong> produce. Instead of generating Python code or Playwright scripts directly, the AI outputs a <strong>language-agnostic JSON plan</strong>. A separate translator layer reads that plan and executes it.</p>
 
 					<p>This is the <strong>Interpreter Pattern</strong> — and it has a specific purpose: the framework was designed knowing it could be adopted by different teams, in different languages, on different projects.</p>
+
+<div style="display:flex; flex-direction:column; align-items:center; gap:0; margin: 2em 0; font-family: monospace;">
+	<!-- Igris -->
+	<div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:0.6em 2em; color:#524b4ba6; text-align:center;">
+		<strong>Igris Agent</strong><br>
+		<span style="font-size:0.8em; opacity:0.8;">Plain text instruction → OpenAI</span>
+	</div>
+	<!-- Arrow down -->
+	<div style="color:rgba(0, 0, 0, .5); font-size:1.4em; line-height:1.2;">↓</div>
+	<!-- JSON Plan -->
+	<div style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.4); border-radius:6px; padding:0.6em 2em; color:#524b4ba6; text-align:center;">
+		<strong>JSON Plan</strong><br>
+		<span style="font-size:0.8em; opacity:0.8;">Works with any language </span>
+	</div>
+	<!-- Arrow down -->
+	<div style="color:rgba(0, 0, 0, 0.5); font-size:1.4em; line-height:1.2;">↓</div>
+	<!-- Translators -->
+	<div style="display:flex; gap:1.5em; justify-content:center; flex-wrap:wrap;">
+		<div style="background:rgba(255,255,255,0.1); border:2px solid rgba(255,255,255,0.5); border-radius:6px; padding:0.6em 1.5em; color:#524b4ba6; text-align:center;">
+			<strong>AI_plan_translator.py</strong><br>
+			<span style="font-size:0.8em; opacity:0.8;">Current: Python · Playwright</span>
+		</div>
+		<div style="background:rgba(255,255,255,0.05); border:1px dashed rgba(255,255,255,0.3); border-radius:6px; padding:0.6em 1.5em; color:#524b4ba6;text-align:center;">
+			<strong>Any future translator</strong><br>
+			<span style="font-size:0.8em;">TypeScript · Java · Selenium…</span>
+		</div>
+	</div>
+</div>
+
+					<p>If the project migrates to a different language or framework, only the translator needs to be rewritten — Igris and the JSON plans remain unchanged.</p>
 
 					<div class="table-wrapper">
 						<table>
@@ -155,8 +185,8 @@
 					<hr />
 -->
 					<ul class="actions">
-						<li><a href="#" class="button">View on GitHub</a></li>
-						<li><a href="https://bencu91.github.io/portfolio/index.html" class="button">Back to Portfolio</a></li>
+						<!-- <li><a href="https://github.com/bencu91/AI_framework" class="button">View on GitHub</a></li> -->
+						<li><a href="index.html" class="button">Back to Portfolio</a></li>
 					</ul>
 
 				</section>
@@ -169,21 +199,17 @@
 					<h2>Interested in AI-driven testing?</h2>
 					<p>Let's talk about what this kind of framework can do for your team.</p>
 					<ul class="actions">
-						<li><a href="https://bencu91.github.io/portfolio/index.html" class="button">Back to Portfolio</a></li>
+						<!-- <li><a href="index.html" class="button">Back to Portfolio</a></li> -->
 					</ul>
 				</section>
 				<section>
 					<h2>Find me</h2>
-					<dl class="alt">
-						<dt>Email</dt>
-						<dd>Available on request</dd>
-					</dl>
 					<ul class="icons">
-						<li><a href="https://github.com/bencu91" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						<li><a href="https://linkedin.com/in/argenis-bennett" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/bencu91" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+						<li><a href="https://linkedin.com/in/argenis-bennett" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
 					</ul>
 				</section>
-				<p class="copyright">&copy; Argenis. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+				<p class="copyright">&copy; Argenis B. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 			</footer>
 
 		</div>
